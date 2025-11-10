@@ -1,7 +1,7 @@
 import { View, Text, Button, TextInput, StyleSheet, Alert } from "react-native";
 import CommonButton from "../../components/CommonButton";
 import { useState } from "react";
-function HomeScreen() {
+function HomeScreen({onPickNumber}) {
   const [enteredNumber, setEnteredNumber] = useState("");
   const numberInputHandler = (inputText) => {
     setEnteredNumber(inputText);
@@ -20,8 +20,7 @@ function HomeScreen() {
       );
       return;
     }
-
-    console.log("Valid number:", enteredValue);
+    onPickNumber(enteredValue)
   };
 
   return (
