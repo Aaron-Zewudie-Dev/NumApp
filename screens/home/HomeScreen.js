@@ -1,5 +1,5 @@
 import { View, Text, Button, TextInput, StyleSheet, Alert } from "react-native";
-import CommonButton from "../../components/CommonButton";
+import CommonButton from "../../components/ui/CommonButton";
 import { useState } from "react";
 import Colors from "../../constants/colors";
 function HomeScreen({onPickNumber}) {
