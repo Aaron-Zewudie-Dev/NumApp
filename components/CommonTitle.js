@@ -1,5 +1,6 @@
 
 import {Text,StyleSheet} from 'react-native'
+import Colors from '../constants/colors';
 function CommonTitle({children}){
      <Text style = {style.titleStyle}>{children}</Text>
 }
@@ -9,10 +10,10 @@ const style = StyleSheet.compose({
     titleStyle: {
     fontSize:24,
     fontWeight:'bold',
-    color:'#ddb52f',
+    color:Colors.accent500,
     textAlign:'center',
     borderBottomWidth:2,
-    borderColor:'#ddb52f',
+    borderColor:Colors.accent500,
     padding:12,
   }
 })
