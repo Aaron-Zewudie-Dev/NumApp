@@ -9,14 +9,22 @@ function HomeScreen() {
         autoCapitalize="none"
         autoCorrect={false}
       />
-      <CommonButton buttonLable="Rest" />
-      <CommonButton buttonLable="Confirm" />
+      <View style={homeScreenStyle.buttonContainerStyle}>
+        <View style={homeScreenStyle.buttonContainer}>
+          <CommonButton buttonLable="Rest" />
+        </View>
+        <View style={homeScreenStyle.buttonContainer}>
+          <CommonButton buttonLable="Confirm" />
+        </View>
+      </View>
     </View>
   );
 }
 export default HomeScreen;
 const homeScreenStyle = StyleSheet.create({
   inputContener: {
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 100,
     marginHorizontal: 24,
     padding: 8,
@@ -39,4 +47,10 @@ const homeScreenStyle = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  buttonContainerStyle: {
+    flexDirection:'row',
+  },
+  buttonContainer:{
+    flex:1
+  }
 });
