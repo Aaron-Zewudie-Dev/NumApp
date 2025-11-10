@@ -1,6 +1,29 @@
-import { View, Text, Button, TextInput, StyleSheet } from "react-native";
+import { View, Text, Button, TextInput, StyleSheet, Alert } from "react-native";
 import CommonButton from "../../components/CommonButton";
+import { useState } from "react";
 function HomeScreen() {
+  const [enteredNumber, setEnteredNumber] = useState("");
+  const numberInputHandler = (inputText) => {
+    setEnteredNumber(inputText);
+  };
+  const resetInputHandler = () => {
+    setEnteredNumber("");
+  };
+  const confirmInputHandler = () => {
+    const enteredValue = parseInt(enteredNumber);
+
+    if (isNaN(enteredValue) || enteredValue <= 0 || enteredValue > 99) {
+      Alert.alert(
+        "Invalid number!",
+        "Number has to be a number between 1 and 99.",
+        [{ text: "Okay", style: "destructive", onPress: resetInputHandler }]
+      );
+      return;
+    }
+
+    console.log("Valid number:", enteredValue);
+  };
+
   return (
     <View style={homeScreenStyle.inputContener}>
       <TextInput
@@ -8,13 +31,15 @@ function HomeScreen() {
         maxLength={2}
         autoCapitalize="none"
         autoCorrect={false}
+        value={enteredNumber}
+        onChangeText={numberInputHandler}
       />
       <View style={homeScreenStyle.buttonContainerStyle}>
         <View style={homeScreenStyle.buttonContainer}>
-          <CommonButton buttonLable="Rest" />
+          <CommonButton onpress={resetInputHandler} buttonLable="Rest" />
         </View>
         <View style={homeScreenStyle.buttonContainer}>
-          <CommonButton buttonLable="Confirm" />
+          <CommonButton onPress={confirmInputHandler} buttonLable="Confirm" />
         </View>
       </View>
     </View>
@@ -48,9 +73,9 @@ const homeScreenStyle = StyleSheet.create({
     textAlign: "center",
   },
   buttonContainerStyle: {
-    flexDirection:'row',
+    flexDirection: "row",
   },
-  buttonContainer:{
-    flex:1
-  }
+  buttonContainer: {
+    flex: 1,
+  },
 });
