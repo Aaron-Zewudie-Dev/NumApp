@@ -34,23 +34,23 @@ function GameScreen({ userNumber, onGameOver }) {
     minBoundary = 1;
     maxBoundary = 100;
   }, [userNumber]);
-    useEffect(() => {
-  if (currentGuess === userNumber) {
-    onGameOver(guessRounds.length);
-  }
-}, [currentGuess, userNumber, onGameOver]);
+  useEffect(() => {
+    if (currentGuess === userNumber) {
+      onGameOver(guessRounds.length);
+    }
+  }, [currentGuess, userNumber, onGameOver]);
   function nextGuessHandler(direction) {
     if (
-      (direction === 'lower' && currentGuess < userNumber) ||
-      (direction === 'greater' && currentGuess > userNumber)
+      (direction === "lower" && currentGuess < userNumber) ||
+      (direction === "greater" && currentGuess > userNumber)
     ) {
       Alert.alert("Don't lie!", "You know that this is wrong...", [
-        { text: 'Sorry!', style: 'cancel' },
+        { text: "Sorry!", style: "cancel" },
       ]);
       return;
     }
 
-    if (direction === 'lower') {
+    if (direction === "lower") {
       maxBoundary = currentGuess;
     } else {
       minBoundary = currentGuess + 1;
@@ -108,7 +108,6 @@ function GameScreen({ userNumber, onGameOver }) {
     </View>
   );
 }
-
 
 export default GameScreen;
 

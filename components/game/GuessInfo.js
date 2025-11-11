@@ -1,4 +1,4 @@
-import {View, Text,StyleSheet} from 'react-native'
+import { View, Text, StyleSheet } from "react-native";
 import Colors from "../../constants/colors";
 
 function GuessInfo({ roundNumber, guess }) {
