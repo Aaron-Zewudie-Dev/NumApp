@@ -18,7 +18,7 @@ Behind this playful game lies clean, well-structured React Native code that’s 
 
 # Screenshots
 
-## Before Adding Skills (Home Screen – Android)
+## Home Screen – Android
 
 <img width="1080" height="2424" alt="Screenshot_1762742087" src="https://github.com/user-attachments/assets/4443057b-da7f-49d1-9d4f-3d78943aec3d" />
 
@@ -26,13 +26,17 @@ Behind this playful game lies clean, well-structured React Native code that’s 
 
 <img width="1284" height="2778" alt="IMG_5920" src="https://github.com/user-attachments/assets/87b600c9-4cfa-4ae8-9359-0fbc64b0fbe8" />
 
-## After Adding Skills (Home Screen – Android)
+## Game Screen – Android
 
-<img width="1080" height="2424" alt="Screenshot_1762742306" src="https://github.com/user-attachments/assets/3d1c9aef-c091-4554-8e75-982297c6e66b" />
+<img width="1080" height="2400" alt="Screenshot_1762904032" src="https://github.com/user-attachments/assets/cdd0ae10-b56a-4676-a994-cef74d960fb1" />
 
 ## Game Screen – Ios
 
 <img width="1284" height="2778" alt="IMG_5923" src="https://github.com/user-attachments/assets/5ed438d9-b8c8-4dde-9479-06d130067009" />
+
+## Game overly Screen – Android
+
+<img width="1080" height="2400" alt="Screenshot_1762904075" src="https://github.com/user-attachments/assets/1eb28307-5982-4619-aa45-216703351fb3" />
 
 ## Game overly Screen – Ios
 
