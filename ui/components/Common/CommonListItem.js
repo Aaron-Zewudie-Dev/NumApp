@@ -1,16 +1,16 @@
 import { View, Text, StyleSheet } from "react-native";
-import Colors from "../../constants/colors";
+import Colors from "../../../utilities/constants/colors";
 
-function GuessInfo({ roundNumber, guess }) {
+function CommonListItem({ roundNumber, guess }) {
   return (
     <View style={styles.listItem}>
-      <Text style={styles.itemText}>#{roundNumber}</Text>
-      <Text style={styles.itemText}>Opponent's Guess: {guess}</Text>
+      <Text style={styles.itemText}>Trail {roundNumber}</Text>
+      <Text style={styles.itemText}>Phone treid: {guess}</Text>
     </View>
   );
 }
 
-export default GuessInfo;
+export default CommonListItem;
 
 const styles = StyleSheet.create({
   listItem: {

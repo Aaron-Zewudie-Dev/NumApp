@@ -1,10 +1,10 @@
 import { View, Text, Button, TextInput, StyleSheet, Alert } from "react-native";
-import CommonButton from "../../components/ui/CommonButton";
+import CommonButton from "../../components/Common/CommonButton";
 import { useState } from "react";
-import Colors from "../../constants/colors";
-import CommonTitle from "../../components/ui/CommonTitle";
-import CommonInstraction from "../../components/ui/CommonInstraction";
-import CommonCard from "../../components/ui/CommonCard";
+import Colors from "../../../utilities/constants/colors";
+import CommonTitle from "../../components/Common/CommonTitle";
+import CommonInstraction from "../../components/Common/CommonInstraction";
+import CommonCard from "../../components/Common/CommonCard";
 function HomeScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
   const numberInputHandler = (inputText) => {

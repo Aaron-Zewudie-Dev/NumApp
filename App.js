@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { StyleSheet, ImageBackground,SafeAreaView } from "react-native";
-import HomeScreen from "./screens/home/HomeScreen";
+import HomeScreen from "./ui/screens/home/HomeScreen";
 import { LinearGradient } from "expo-linear-gradient";
-import GameScreen from "./screens/game/GameScreen";
-import Colors from "./constants/colors";
-import GameOverlyScreen from "./screens/gameoverly/GameOverlyScreen";
+import GameScreen from "./ui/screens/game/GameScreen";
+import Colors from "./utilities/constants/colors";
+import GameOverlyScreen from "./ui/screens/gameoverly/GameOverlyScreen";
 import {useFonts} from 'expo-font'
 // import * as SplashScreen from "expo-splash-screen";
 export default function App() {

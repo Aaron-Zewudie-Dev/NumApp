@@ -1,7 +1,7 @@
 import { View, Image, Text, StyleSheet } from "react-native";
-import CommonButton from "../../components/ui/CommonButton";
-import CommonTitle from "../../components/ui/CommonTitle";
-import Colors from "../../constants/colors";
+import CommonButton from "../../components/Common/CommonButton";
+import CommonTitle from "../../components/Common/CommonTitle";
+import Colors from "../../../utilities/constants/colors";
 
 function GameOverlyScreen({ roundsNumber, userNumber, onStartNewGame }) {
   return (
@@ -10,7 +10,7 @@ function GameOverlyScreen({ roundsNumber, userNumber, onStartNewGame }) {
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          source={require("../../assets/appimages/success.png")}
+          source={require("../../../assets/appimages/success.png")}
         />
       </View>
       <Text style={styles.summaryText}>

@@ -1,5 +1,5 @@
 import { Text, StyleSheet } from "react-native";
-import Colors from "../../constants/colors";
+import Colors from "../../../utilities/constants/colors";
 function CommonInstraction({ children, style }) {
   return <Text style={[styles.instructionText, style]}>{children}</Text>;
 }

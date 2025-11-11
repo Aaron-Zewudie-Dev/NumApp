@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
-import Colors from "../../constants/colors";
+import Colors from "../../../utilities/constants/colors";
 
-function NumberContainer({ children }) {
+function CommonNumberContainer({ children }) {
   return (
     <View style={styles.container}>
       <Text style={styles.numberText}>{children}</Text>
@@ -9,7 +9,7 @@ function NumberContainer({ children }) {
   );
 }
 
-export default NumberContainer;
+export default CommonNumberContainer;
 
 const styles = StyleSheet.create({
   container: {

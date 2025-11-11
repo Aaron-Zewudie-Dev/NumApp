@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { View, StyleSheet, Alert, Text, FlatList } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import CommonTitle from "../../components/ui/CommonTitle";
-import NumberContainer from "../../components/game/NumberContainer";
-import CommonButton from "../../components/ui/CommonButton";
-import CommonInstraction from "../../components/ui/CommonInstraction";
-import CommonCard from "../../components/ui/CommonCard";
-import GuessInfo from "../../components/game/GuessInfo";
+import CommonTitle from "../../components/Common/CommonTitle";
+import CommonButton from "../../components/Common/CommonButton";
+import CommonInstraction from "../../components/Common/CommonInstraction";
+import CommonCard from "../../components/Common/CommonCard";
+import CommonNumberContainer from "../../components/Common/CommonNumberContainer";
+import CommonListItem from "../../components/Common/CommonListItem";
 
 let minBoundary = 1;
 let maxBoundary = 100;
@@ -70,7 +69,7 @@ function GameScreen({ userNumber, onGameOver }) {
   return (
     <View style={styles.screen}>
       <CommonTitle>Opponent's Guess</CommonTitle>
-      <NumberContainer>{currentGuess}</NumberContainer>
+      <CommonNumberContainer>{currentGuess}</CommonNumberContainer>
 
       <CommonCard>
         <CommonInstraction style={styles.instructionText}>
@@ -97,7 +96,7 @@ function GameScreen({ userNumber, onGameOver }) {
         <FlatList
           data={guessRounds}
           renderItem={(itemData) => (
-            <GuessInfo
+            <CommonListItem
               roundNumber={guessRoundsListLength - itemData.index}
               guess={itemData.item}
             />
