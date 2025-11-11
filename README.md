@@ -20,7 +20,7 @@ Behind this playful game lies clean, well-structured React Native code that’s 
 
 ## Home Screen – Android
 
-<img width="1080" height="2424" alt="Screenshot_1762742087" src="https://github.com/user-attachments/assets/4443057b-da7f-49d1-9d4f-3d78943aec3d" />
+<img width="1080" height="2424" alt="Screenshot_1762905200" src="https://github.com/user-attachments/assets/6a7229c0-3e10-4d40-b349-777880a215a3" />
 
 ## Home Screen – Ios
 
