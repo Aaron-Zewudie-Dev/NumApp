@@ -1,80 +1,133 @@
-import { useState,useEffect } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { useState, useEffect } from "react";
+import { View, StyleSheet, Alert, Text, FlatList } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import CommonTitle from "../../components/ui/CommonTitle";
 import NumberContainer from "../../components/game/NumberContainer";
 import CommonButton from "../../components/ui/CommonButton";
+import CommonInstraction from "../../components/ui/CommonInstraction";
+import CommonCard from "../../components/ui/CommonCard";
+import GuessInfo from "../../components/game/GuessInfo";
+
+let minBoundary = 1;
+let maxBoundary = 100;
+
 function generateRandomNumber(min, max, exclude) {
-  const randomNumber = Math.floor(Math.random() * (max - min)) + min;
-  if (randomNumber === exclude) {
+  if (max <= min) return min; // prevents infinite recursion
+  const rndNum = Math.floor(Math.random() * (max - min)) + min;
+  if (rndNum === exclude) {
     return generateRandomNumber(min, max, exclude);
   } else {
-    return randomNumber;
+    return rndNum;
   }
 }
-let minBoundary = 1;
-let maxBoundary;
 
-function GameScreen({ userEnteredNumber, onGameOver }) {
-  const initiaGuess = generateRandomNumber(
-    1,
-    100,
-    userEnteredNumber
+function GameScreen({ userNumber, onGameOver }) {
+  const [currentGuess, setCurrentGuess] = useState(() =>
+    generateRandomNumber(1, 100, userNumber)
   );
-  const [currentGuess, SetCurrentGuess] = useState(initiaGuess);
-  useEffect(() =>{
-    if(currentGuess === userEnteredNumber){
-        onGameOver();
-    }
-  },[currentGuess,userEnteredNumber,onGameOver])
+  const [guessRounds, setGuessRounds] = useState([currentGuess]);
+
+  const guessRoundsListLength = guessRounds.length;
+
+  // reset boundaries when userNumber changes (new game)
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, [userNumber]);
+    useEffect(() => {
+  if (currentGuess === userNumber) {
+    onGameOver(guessRounds.length);
+  }
+}, [currentGuess, userNumber, onGameOver]);
   function nextGuessHandler(direction) {
     if (
-      (direction === "lower" && currentGuess < userEnteredNumber) ||
-      (direction === "greater" && currentGuess > userEnteredNumber)
+      (direction === 'lower' && currentGuess < userNumber) ||
+      (direction === 'greater' && currentGuess > userNumber)
     ) {
       Alert.alert("Don't lie!", "You know that this is wrong...", [
-        { text: "Sorry!", style: "cancel" },
+        { text: 'Sorry!', style: 'cancel' },
       ]);
       return;
     }
-    if (direction === "lower") {
+
+    if (direction === 'lower') {
       maxBoundary = currentGuess;
     } else {
       minBoundary = currentGuess + 1;
     }
-    const newRandomNumber = generateRandomNumber(
+
+    const newRndNumber = generateRandomNumber(
       minBoundary,
       maxBoundary,
       currentGuess
     );
-    SetCurrentGuess(newRandomNumber);
+
+    setCurrentGuess(newRndNumber);
+
+    setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
   }
+
   return (
-    <View style={gameScreenStyle.screenContainerStyle}>
-      <CommonTitle children="Opponent's Guess" />
+    <View style={styles.screen}>
+      <CommonTitle>Opponent's Guess</CommonTitle>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
-        <Text>Higher or Lower</Text>
-        <View>
-          <CommonButton onPress={nextGuessHandler.bind(this, "lower")}>
-            -
-          </CommonButton>
-          <CommonButton onPress={nextGuessHandler.bind(this, "greater")}>
-            +
-          </CommonButton>
+
+      <CommonCard>
+        <CommonInstraction style={styles.instructionText}>
+          Higher or lower?
+        </CommonInstraction>
+
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <CommonButton
+              onPress={nextGuessHandler.bind(this, "lower")}
+              buttonLable={"Under"}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <CommonButton
+              onPress={nextGuessHandler.bind(this, "greater")}
+              buttonLable={"Over"}
+            />
+          </View>
         </View>
-      </View>
-      <View>
-        <Text>Log Rounds</Text>
+      </CommonCard>
+
+      <View style={styles.listContainer}>
+        <FlatList
+          data={guessRounds}
+          renderItem={(itemData) => (
+            <GuessInfo
+              roundNumber={guessRoundsListLength - itemData.index}
+              guess={itemData.item}
+            />
+          )}
+          keyExtractor={(item) => item.toString()}
+        />
       </View>
     </View>
   );
 }
 
+
 export default GameScreen;
 
-const gameScreenStyle = StyleSheet.create({
-  screenContainerStyle: {
+const styles = StyleSheet.create({
+  screen: {
     flex: 1,
     padding: 24,
+  },
+  instructionText: {
+    marginBottom: 12,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+  },
+  buttonContainer: {
+    flex: 1,
+  },
+  listContainer: {
+    flex: 1,
+    padding: 16,
   },
 });

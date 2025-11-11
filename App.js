@@ -6,27 +6,54 @@ import GameScreen from "./screens/game/GameScreen";
 import Colors from "./constants/colors";
 import GameOverlyScreen from "./screens/gameoverly/GameOverlyScreen";
 import {useFonts} from 'expo-font'
-import AppLoading from 'exp'
+// import * as SplashScreen from "expo-splash-screen";
 export default function App() {
-  const [ userNumber,setUserNumber] = useState()
-  const [gameIsOver,setGameIsOver] = useState(true)
-  useFonts({})
-  const pickNumberHandler = (enteredNumber)=>{
-    setUserNumber(enteredNumber)
-    setGameIsOver(false)
-  }
-    function gameOverHandler(){
-    setGameISOver(true)
-  }
+const [userNumber, setUserNumber] = useState(null);
+const [gameIsOver, setGameIsOver] = useState(false);
+const [guessRounds, setGuessRounds] = useState(0);
 
-  let appScreen = <HomeScreen onPickNumber = {pickNumberHandler}/>
-  if(userNumber){
-    appScreen = <GameScreen userEnteredNumber={userNumber} onGameOver = {gameOverHandler}/>
-  }
-  if(gameIsOver && userNumber){
-    screen = <GameOverlyScreen/>
-  }
+const [fontsLoaded] = useFonts({
+  'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+  'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+});
 
+function pickNumberHandler(enteredNumber) {
+  setUserNumber(enteredNumber);
+  setGameIsOver(false);
+}
+
+function gameOverHandler(numberOfRounds) {
+  setGameIsOver(true);
+  setGuessRounds(numberOfRounds);
+}
+
+function startNewGameHandler() {
+  setUserNumber(null);
+  setGuessRounds(0);
+  setGameIsOver(false);
+}
+
+let appScreen = <HomeScreen onPickNumber={pickNumberHandler} />;
+
+if (userNumber && !gameIsOver) {
+  appScreen = (
+    <GameScreen
+      userNumber={userNumber} 
+      onGameOver={gameOverHandler}
+    />
+  );
+}
+
+if (gameIsOver && userNumber) {
+  appScreen = (
+    <GameOverlyScreen
+      userNumber={userNumber}
+      roundsNumber={guessRounds}
+      onStartNewGame={startNewGameHandler}
+    />
+  );
+}
+ 
   return ( 
     <LinearGradient colors={[Colors.primary700, Colors.accent500]} style={styles.container}>
       <ImageBackground

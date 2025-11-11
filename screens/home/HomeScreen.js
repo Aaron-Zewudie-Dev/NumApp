@@ -2,7 +2,10 @@ import { View, Text, Button, TextInput, StyleSheet, Alert } from "react-native";
 import CommonButton from "../../components/ui/CommonButton";
 import { useState } from "react";
 import Colors from "../../constants/colors";
-function HomeScreen({onPickNumber}) {
+import CommonTitle from "../../components/ui/CommonTitle";
+import CommonInstraction from "../../components/ui/CommonInstraction";
+import CommonCard from "../../components/ui/CommonCard";
+function HomeScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
   const numberInputHandler = (inputText) => {
     setEnteredNumber(inputText);
@@ -21,48 +24,43 @@ function HomeScreen({onPickNumber}) {
       );
       return;
     }
-    onPickNumber(enteredValue)
+    onPickNumber(enteredValue);
   };
 
   return (
     <View style={homeScreenStyle.inputContener}>
-      <TextInput
-        style={homeScreenStyle.inputFieldStyle}
-        maxLength={2}
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={enteredNumber}
-        onChangeText={numberInputHandler}
-      />
-      <View style={homeScreenStyle.buttonContainerStyle}>
-        <View style={homeScreenStyle.buttonContainer}>
-          <CommonButton onpress={resetInputHandler} buttonLable="Rest" />
+      <CommonTitle>Guess My Number</CommonTitle>
+      <CommonCard>
+        <CommonInstraction>Enter a Number</CommonInstraction>
+        <TextInput
+          style={homeScreenStyle.inputFieldStyle}
+          maxLength={2}
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={enteredNumber}
+          onChangeText={numberInputHandler}
+        />
+        <View style={homeScreenStyle.buttonContainerStyle}>
+          <View style={homeScreenStyle.buttonContainer}>
+            <CommonButton onpress={resetInputHandler} buttonLable="Rest" />
+          </View>
+          <View style={homeScreenStyle.buttonContainer}>
+            <CommonButton onPress={confirmInputHandler} buttonLable="Confirm" />
+          </View>
         </View>
-        <View style={homeScreenStyle.buttonContainer}>
-          <CommonButton onPress={confirmInputHandler} buttonLable="Confirm" />
-        </View>
-      </View>
+      </CommonCard>
     </View>
   );
 }
 export default HomeScreen;
 const homeScreenStyle = StyleSheet.create({
   inputContener: {
-    justifyContent: "center",
-    alignItems: "center",
+    flex: 1,
     marginTop: 100,
-    marginHorizontal: 24,
-    padding: 8,
-    backgroundColor: Colors.primary800,
-    borderRadius: 8,
-    elevation: 10,
-    shadowColor: "black",
-    shadowOffset: { with: 0, height: 2 },
-    shadowRadius: 8,
-    shadowOpacity: 0.25,
+    alignItems: "center",
   },
   inputFieldStyle: {
-    height: 60,
+    height: 50,
     width: 50,
     fontSize: 32,
     borderBottomColor: Colors.accent500,
