@@ -4,15 +4,27 @@ import HomeScreen from "./screens/home/HomeScreen";
 import { LinearGradient } from "expo-linear-gradient";
 import GameScreen from "./screens/game/GameScreen";
 import Colors from "./constants/colors";
-
+import GameOverlyScreen from "./screens/gameoverly/GameOverlyScreen";
+import {useFonts} from 'expo-font'
+import AppLoading from 'exp'
 export default function App() {
   const [ userNumber,setUserNumber] = useState()
+  const [gameIsOver,setGameIsOver] = useState(true)
+  useFonts({})
   const pickNumberHandler = (enteredNumber)=>{
     setUserNumber(enteredNumber)
+    setGameIsOver(false)
   }
+    function gameOverHandler(){
+    setGameISOver(true)
+  }
+
   let appScreen = <HomeScreen onPickNumber = {pickNumberHandler}/>
   if(userNumber){
-    appScreen = <GameScreen/>
+    appScreen = <GameScreen userEnteredNumber={userNumber} onGameOver = {gameOverHandler}/>
+  }
+  if(gameIsOver && userNumber){
+    screen = <GameOverlyScreen/>
   }
 
   return ( 

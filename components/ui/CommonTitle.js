@@ -10,10 +10,10 @@ const style = StyleSheet.compose({
     titleStyle: {
     fontSize:24,
     fontWeight:'bold',
-    color:Colors.accent500,
+    color:'white',
     textAlign:'center',
     borderBottomWidth:2,
-    borderColor:Colors.accent500,
+    borderColor:'white',
     padding:12,
   }
 })
