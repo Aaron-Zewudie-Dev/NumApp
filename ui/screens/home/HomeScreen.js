@@ -1,4 +1,14 @@
-import { View, Text, Button, TextInput, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  Button,
+  TextInput,
+  StyleSheet,
+  Alert,
+  useWindowDimensions,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 import CommonButton from "../../components/Common/CommonButton";
 import { useState } from "react";
 import Colors from "../../../utilities/constants/colors";
@@ -6,6 +16,7 @@ import CommonTitle from "../../components/Common/CommonTitle";
 import CommonInstraction from "../../components/Common/CommonInstraction";
 import CommonCard from "../../components/Common/CommonCard";
 function HomeScreen({ onPickNumber }) {
+  const { width, height } = useWindowDimensions();
   const [enteredNumber, setEnteredNumber] = useState("");
   const numberInputHandler = (inputText) => {
     setEnteredNumber(inputText);
@@ -26,37 +37,50 @@ function HomeScreen({ onPickNumber }) {
     }
     onPickNumber(enteredValue);
   };
-
+  const mariginTop = height < 380 ? 30 : 100;
   return (
-    <View style={homeScreenStyle.inputContener}>
-      <CommonTitle>Guess My Number</CommonTitle>
-      <CommonCard>
-        <CommonInstraction>Enter a Number</CommonInstraction>
-        <TextInput
-          style={homeScreenStyle.inputFieldStyle}
-          maxLength={2}
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={enteredNumber}
-          onChangeText={numberInputHandler}
-        />
-        <View style={homeScreenStyle.buttonContainerStyle}>
-          <View style={homeScreenStyle.buttonContainer}>
-            <CommonButton onpress={resetInputHandler} buttonLable="Rest" />
-          </View>
-          <View style={homeScreenStyle.buttonContainer}>
-            <CommonButton onPress={confirmInputHandler} buttonLable="Confirm" />
-          </View>
+    <ScrollView style={homeScreenStyle.screen}>
+      <KeyboardAvoidingView style={homeScreenStyle.screen} behavior="position">
+        <View
+          style={[homeScreenStyle.inputContener, { marginTop: mariginTop }]}
+        >
+          <CommonTitle>Guess My Number</CommonTitle>
+          <CommonCard>
+            <CommonInstraction>Enter a Number</CommonInstraction>
+            <TextInput
+              style={homeScreenStyle.inputFieldStyle}
+              maxLength={2}
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={enteredNumber}
+              onChangeText={numberInputHandler}
+            />
+            <View style={homeScreenStyle.buttonContainerStyle}>
+              <View style={homeScreenStyle.buttonContainer}>
+                <CommonButton onpress={resetInputHandler} buttonLable="Rest" />
+              </View>
+              <View style={homeScreenStyle.buttonContainer}>
+                <CommonButton
+                  onPress={confirmInputHandler}
+                  buttonLable="Confirm"
+                />
+              </View>
+            </View>
+          </CommonCard>
         </View>
-      </CommonCard>
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 export default HomeScreen;
+// const deviceHeight = Dimensions.get("window").height;
 const homeScreenStyle = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   inputContener: {
     flex: 1,
-    marginTop: 100,
+    // marginTop: deviceHeight < 400 ? 30 : 100,
     alignItems: "center",
   },
   inputFieldStyle: {

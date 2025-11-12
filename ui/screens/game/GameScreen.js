@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, StyleSheet, Alert, Text, FlatList } from "react-native";
+import { View, StyleSheet, Alert, Text, FlatList,useWindowDimensions } from "react-native";
 import CommonTitle from "../../components/Common/CommonTitle";
 import CommonButton from "../../components/Common/CommonButton";
 import CommonInstraction from "../../components/Common/CommonInstraction";
@@ -25,8 +25,10 @@ function GameScreen({ userNumber, onGameOver }) {
     generateRandomNumber(1, 100, userNumber)
   );
   const [guessRounds, setGuessRounds] = useState([currentGuess]);
+  const {width,height} = useWindowDimensions()
 
   const guessRoundsListLength = guessRounds.length;
+
 
   // reset boundaries when userNumber changes (new game)
   useEffect(() => {
@@ -66,10 +68,8 @@ function GameScreen({ userNumber, onGameOver }) {
     setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
   }
 
-  return (
-    <View style={styles.screen}>
-      <CommonTitle>Opponent's Guess</CommonTitle>
-      <CommonNumberContainer>{currentGuess}</CommonNumberContainer>
+  let content = <>
+  <CommonNumberContainer>{currentGuess}</CommonNumberContainer>
 
       <CommonCard>
         <CommonInstraction style={styles.instructionText}>
@@ -91,6 +91,36 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </CommonCard>
+  </>
+
+  if(width > 500){
+    content =  <>
+        <View style={styles.buttonContainerWide}>
+            <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <CommonButton
+              onPress={nextGuessHandler.bind(this, "lower")}
+              buttonLable={"Under"}
+            />
+          </View>
+          <CommonNumberContainer>{currentGuess}</CommonNumberContainer>
+          <View style={styles.buttonContainer}>
+            <CommonButton
+              onPress={nextGuessHandler.bind(this, "greater")}
+              buttonLable={"Over"}
+            />
+          </View>
+        </View>
+           <CommonNumberContainer>{currentGuess}</CommonNumberContainer>
+        </View>
+   
+    </>
+  }
+
+  return (
+    <View style={styles.screen}>
+      <CommonTitle>Opponent's Guess</CommonTitle>
+      {content}
 
       <View style={styles.listContainer}>
         <FlatList
@@ -114,6 +144,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 24,
+    alignItems:"center"
   },
   instructionText: {
     marginBottom: 12,
@@ -128,4 +159,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
+  buttonContainerWide:{
+    flexDirection:'row',
+    alignItems:'center',
+  }
 });
