@@ -6,6 +6,7 @@ import GameScreen from "./ui/screens/game/GameScreen";
 import Colors from "./utilities/constants/colors";
 import GameOverlyScreen from "./ui/screens/gameoverly/GameOverlyScreen";
 import {useFonts} from 'expo-font'
+import { StatusBar } from "expo-status-bar";
 // import * as SplashScreen from "expo-splash-screen";
 export default function App() {
 const [userNumber, setUserNumber] = useState(null);
@@ -55,6 +56,8 @@ if (gameIsOver && userNumber) {
 }
  
   return ( 
+    <>
+    <StatusBar style='auto'/>
     <LinearGradient colors={[Colors.primary700, Colors.accent500]} style={styles.container}>
       <ImageBackground
         source={require("./assets/appimages/background.png")}
@@ -67,6 +70,7 @@ if (gameIsOver && userNumber) {
         </SafeAreaView>
       </ImageBackground>
     </LinearGradient>
+    </>
   );
 }
 

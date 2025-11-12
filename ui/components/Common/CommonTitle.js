@@ -1,4 +1,4 @@
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Platform } from "react-native";
 function CommonTitle({ children }) {
   <Text style={style.titleStyle}>{children}</Text>;
 }
@@ -10,10 +10,11 @@ const style = StyleSheet.compose({
     fontWeight: "bold",
     color: "white",
     textAlign: "center",
-    borderBottomWidth: 2,
+    // borderWidth: Platform.OS === "android" ? 2 : 0,
+    borderWidth:Platform.select({iso:0,android:2}),
     borderColor: "white",
     padding: 12,
-    maxWidth:"80%",
-    minWidth:""
+    maxWidth: "80%",
+    minWidth: "",
   },
 });
